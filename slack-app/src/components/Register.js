@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import { login } from "../API/avion-slack-api";
+import { register } from "../API/avion-slack-api";
 
-const Login = () => {
+const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState([]);
   const [flash, setFlash] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const [response, error] = await login(email, password);
-    if (error.length) {
-      setError(error);
+    const [response, errors] = await register(
+      email,
+      password,
+      passwordConfirmation
+    );
+    if (errors.length > 0) {
+      setError(errors);
     } else {
-      console.log("login response", response);
-      setFlash("Login Successfully");
+      console.log("register response", response);
+      setFlash("Registered Successfuly");
     }
     setIsLoading(false);
   };
@@ -27,11 +32,11 @@ const Login = () => {
         <p>Loading ....</p>
       ) : (
         <div>
-          Login
+          Register
           <div>
             <label htmlFor="">Email:</label>
             <input
-              type="email"
+              type="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -44,8 +49,15 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error.lg}
-          <button onClick={handleLogin}>Login</button>
+          <div>
+            <label htmlFor="">Confirm Password:</label>
+            <input
+              type="Confirm Password"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+            />
+          </div>
+          <button onClick={handleRegister}>Register</button>
         </div>
       )}
       {error.length ? error.map((err) => <p>{err}</p>) : null}
@@ -53,4 +65,5 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+
+export default Register;

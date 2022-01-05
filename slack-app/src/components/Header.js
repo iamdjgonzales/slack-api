@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header() {
   return (
     <Container>
-      <Main></Main>
+      <Main>Header</Main>
       {/* <UserContainer></UserContainer> */}
     </Container>
   );
@@ -13,3 +13,5 @@ function Header() {
 export default Header;
 
 const Container = styled.div``;
+
+const Main = styled.div``;

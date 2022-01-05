@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Sidebar() {
-    return (
-        <div style={{ background: 'purple'}}>
-            Sidebar
-        </div>
-    )
+  return <div style={{ background: "purple" }}>Sidebar</div>;
 }
 
-export default Sidebar
+export default Sidebar;
